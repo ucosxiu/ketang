@@ -1,0 +1,10 @@
+/.idea
+/.vscode
+/vendor
+*.log
+runtime
+.env
+.DS_Store
+public/assets
+public/assetsqrcode
+
