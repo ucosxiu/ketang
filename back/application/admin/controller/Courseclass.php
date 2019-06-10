@@ -39,7 +39,6 @@ class Courseclass extends Adminbase
         } else {
             $pid = $this->request->param('pid', 0, 'intval');
             $courseclass_model = model('courseclass');
-
             $courseclasss = $courseclass_model->getAllChildByParentId(0);
             $this->assign('courseclasss', $courseclasss);
             $this->assign('pid', $pid);
@@ -55,13 +54,13 @@ class Courseclass extends Adminbase
         if (!$courseclass) {
             $this->error('parameter_error');
         }
-        $parentid = $this->request->param('parentid', 0, 'intval');
-
-        if ($id == $parentid) {
-            $this->error('不能选择自己作为父分类');
-        }
 
         if ($this->request->isAjax()) {
+            $parentid = $this->request->param('cc_parent_id', 0, 'intval');
+            if ($id == $parentid ) {
+                $this->error('不能选择自己作为父分类');
+            }
+
             $param = $this->request->param();
             if ($courseclass->data($param)->allowField(true)->save()) {
                 $this->success(lang('save_success'), Url('courseclass/index'));
@@ -72,7 +71,7 @@ class Courseclass extends Adminbase
             $courseclasss = $courseclass_model->getAllChildByParentId(0);
             $this->assign('courseclasss', $courseclasss);
             $this->assign('courseclass', $courseclass);
-            $this->assign('pid', $courseclass['parentid']);
+            $this->assign('pid', $courseclass['cc_parent_id']);
             return $this->fetch();
         }
     }
@@ -81,7 +80,7 @@ class Courseclass extends Adminbase
     function del() {
         $id = $this->request->param('id', 0, 'intval');
         $courseclass_model = model('courseclass');
-        if ($courseclass_model->where(['tc_id'=>$id])->delete()) {
+        if ($courseclass_model->where(['cc_id'=>$id])->delete()) {
             $this->success(lang('delete_success'));
         }
         $this->error(lang('delete_error'));

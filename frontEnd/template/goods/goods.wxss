@@ -1,0 +1,90 @@
+.course {
+    padding: 20rpx 20rpx 20rpx 0;
+    margin-left: 20rpx;
+}
+
+.course .info {
+    width: 70%;
+}
+
+.course .info .h2tit {
+    height: 20px;
+    line-height: 20px;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}
+
+.course .thumb {
+    width: 100%;
+    height: 75px;
+    display: block;
+    border-radius: 5px;
+}
+
+.course .imgbox {
+    width: 35%;
+    position: relative;
+    margin-right: 5px;
+    overflow: hidden;
+}
+
+.course .thumb {
+    max-width: 300px;
+}
+
+.course .tag {
+    left: 0;
+    position: absolute;
+    top: 0;
+    overflow: hidden;
+    height: 50px;
+}
+
+.course .tag .mark-lt {
+    color: #fff;
+    display: block;
+    font-size: 10px!important;
+    left: -31px;
+    height: 18px;
+    line-height: 22px!important;
+    position: relative;
+    text-align: center;
+    top: -2px;
+    transform: rotate(-45deg);
+    width: 80px;
+    background-color: #f60;
+}
+
+.price {
+    color: var(--color-price);
+}
+
+.course .info .buy {
+    color: #ff9062;
+}
+
+.oldprice {
+    text-decoration: line-through;
+    color: #ccc;
+}
+
+.course .info .buy {
+    float: right;
+    padding: 0.15em 0.9em;
+    min-width: 10px;
+    border-radius: 18px;
+    line-height: 1.2;
+    vertical-align: middle;
+    border: 1px solid #ff9062;
+}
+
+.course .details {
+    margin-bottom: 10rpx;
+    line-height: 20px;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+}

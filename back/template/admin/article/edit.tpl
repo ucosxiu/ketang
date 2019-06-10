@@ -73,12 +73,12 @@
                                 <div class="layui-form-item ">
                                     <label class="layui-form-label">&nbsp;{:lang('article_content')}</label>
                                     <div class="layui-input-block">
-                                        <textarea name="article_content" id="template_content">{$article.article_content|default=''}</textarea>
+                                        <textarea name="article_content" id="template_content" style="display: none;">{:$article.article_content}</textarea>
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
                                     <div class="layui-input-block">
-                                        <button class="layui-btn" lay-submit="" lay-filter="ajax-submit">{:lang('submit')}</button>
+                                        <button class="layui-btn" lay-submit="" lay-filter="ajax-submit1">{:lang('submit')}</button>
                                     </div>
                                 </div>
                             </form>
@@ -91,7 +91,7 @@
                                 layui.config({
                                     base: '__STATIC__/system/js/' //静态资源所在路径,
                                     ,version: '1.2.1'
-                                }).use(['index', 'admin', 'form', 'upload'], function(){
+                                }).use(['index', 'admin', 'form', 'upload', 'layedit'], function(){
                                     var table = layui.table
                                         ,admin = layui.admin
                                         ,form = layui.form
@@ -109,14 +109,43 @@
                                     }).mouseout(function() {
                                         layer.close(preview)
                                     })
-
-                                    var url="{:url('Ueditor/index')}";
-                                    var ue = UE.getEditor('template_content',{
-                                        serverUrl :url
+                                    var layedit = layui.layedit;
+                                    layedit.set({
+                                        uploadImage: {
+                                            url: "{:Url('asset/layuiup')}" //接口url
+                                            ,type: '' //默认post
+                                        }
                                     });
-                                    setTimeout(function () {
-                                        ue.setHeight(300)
-                                    }, 500)
+                                    var layeditindex = layedit.build('template_content', {
+                                        tool: [
+                                            'strong' //加粗
+                                            ,'italic' //斜体
+                                            ,'underline' //下划线
+                                            ,'del' //删除线
+
+                                            ,'|' //分割线
+
+                                            ,'left' //左对齐
+                                            ,'center' //居中对齐
+                                            ,'right' //右对齐
+                                            ,'link' //超链接
+                                            ,'unlink' //清除链接
+                                            ,'image' //插入图片
+
+                                        ]
+                                    }); //建立编辑器
+                                    layedit.sync(layeditindex)
+
+                                    if (false) {
+                                        var url = "{:url('Ueditor/index')}";
+                                        var ue = UE.getEditor('template_content', {
+                                            serverUrl: url
+                                        });
+
+                                        setTimeout(function () {
+                                            ue.setHeight(300)
+                                        }, 500)
+                                    }
 
                                     var uploadInst = upload.render({
                                         elem: '#test1'
@@ -144,6 +173,32 @@
                                             });
                                         }
                                     });
+
+                                    layui.form.on('submit(ajax-submit1)', function(obj){
+                                        var url = obj.form.action;
+                                        obj.field.article_content = layedit.getContent(layeditindex)
+                                        $.post(url, obj.field, function(data){
+                                            if (data.code) {
+                                                layer.msg(data.msg, {
+                                                    offset: '15px'
+                                                    ,icon: 1
+                                                    ,time: 1000
+                                                }, function(){
+                                                    if (data.url) {
+                                                        location.href = data.url
+                                                    }
+                                                });
+                                            } else {
+                                                layer.msg(data.msg, {
+                                                    offset: '15px'
+                                                    ,icon: 0
+                                                    ,time: 1000
+                                                }, function(){
+                                                });
+                                            }
+                                        }, 'json')
+                                    })
+
 
                                 })
                             })

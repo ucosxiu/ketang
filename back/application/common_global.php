@@ -51,9 +51,9 @@ define('HTTP_TYPE',  \think\facade\Request::isSsl() ? 'https://' : 'http://');#�
 
 //已取消 下架
 define('ORDER_STATE_CANCEL', 0);
-//已产生 待审核
+//待支付
 define('ORDER_STATE_NEW', 10);
-//已审核 出售中
-define('ORDER_STATE_SALE', 20);
-//出售完
-define('ORDER_STATE_COMPLETE', 30);
+//已支付
+define('ORDER_STATE_PAY', 20);
+//完成
+define('ORDER_STATE_SUCCESS', 30);

@@ -1,0 +1,55 @@
+/* components/footer/footer.wxss */
+.weui-tabbar__panel {
+	display: block;
+	height: 50px;
+	width: 100%;
+	 -webkit-overflow-scrolling: touch;
+	 line-height: 50px;
+    /* box-sizing: border-box;
+    height: 60px !important;
+	width: 100%;
+    overflow: auto;
+	position: absolute;
+	botto
+    -webkit-overflow-scrolling: touch; */
+}
+.weui-tabbar {
+    display: flex;
+    position: fixed;
+    z-index: 500;
+	overflow: hidden;
+	left: 0rpx;
+    right: 0rpx;
+    bottom: 0rpx;
+	height: 60px;
+    width: 100%;
+    background-color: #F7F7FA;
+}
+.weui-tabbar__item {
+    display: block;
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    flex: 1;
+    padding: 5px 0 0;
+    font-size: 0;
+    color: #555555;
+    text-align: center;
+	background: #ffffff;
+}
+.weui-bar__item_on{
+	color: #39bfb2;
+}
+.weui-tabbar__icon{
+	font-size: 22px !important;
+	line-height: 1.2 !important;
+}
+.weui-tabbar__label {
+    text-align: center;
+    color: #808080;
+    font-size: 14px;
+    line-height: 1.8;
+}
+.weui-bar__item_on .weui-tabbar__label{
+	color: #39bfb2;
+}
+@import '../../assets/styles/iconfont.wxss';

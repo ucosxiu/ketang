@@ -148,19 +148,15 @@ $lang = [
 //        'appsecret' => '9b521d0a38e6e356c60d501a48dadd35',
 //    ],
     'wechat' => [
-        'appid' => 'wx92116b89111a83cd',
-        'appsecret' => 'e1aaeff71dd1018a3aafe0bd2c5c59df',
+        'appid' => 'wx7989803ad9c3c3dc',
+        'appsecret' => 'c4b17453c818c087c8d5e548ec9598e9',
     ],
-    'baidu' => [
-        'client_id' => 'f3kOy1N1UvFG45pjbrHXeTqF',
-        'client_secret' => '3QoMr1GvMcyPSocnoFFBzLOIrchXkLip'
+    'payment_config' => [
+        'xcx_appid' => 'wx7989803ad9c3c3dc',
+        'xcx_appsecret' => 'c4b17453c818c087c8d5e548ec9598e9',
+        'xcx_mch_id' => '1514477651',
+        'xcx_key' => 'f81bee65aaf3a5b3ea9b5efb18255865'
     ]
-//    'payment_config' => [
-//        'xcx_appid' => 'wx88aebd97238fb642',
-//        'xcx_appsecret' => '9b521d0a38e6e356c60d501a48dadd35',
-//        'xcx_mch_id' => '1514477651',
-//        'xcx_key' => 'f81bee65aaf3a5b3ea9b5efb18255865'
-//    ]
 
 ];
 $configPath = App::getConfigPath();

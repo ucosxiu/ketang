@@ -1,13 +1,13 @@
 {extend name="public/base" /}
 {block name="main-content"}
-    <div class="layui-fluid" style="padding: 0">
+    <div class="layui-fluid">
         <div class="layui-row">
             <div class="layui-col-md12">
                 <div class="layui-card" style="padding: 15px 0">
                     <div class="layui-card-header">
                         <div class="layui-tab">
                             <ul class="layui-tab-title">
-                                <li><a href="{:Url('articleclass/index')}">{:lang('list')}</a></li>
+                                <li><a href="{:Url('courseclass/index')}">{:lang('list')}</a></li>
                                 <li class="layui-this">{:lang('edit')}</li>
                             </ul>
                         </div>
@@ -29,46 +29,46 @@
                         <div class="layui-form">
                             <form class="layui-form" action="" method="post" onsubmit="return false">
                                 <div class="layui-form-item">
-                                    <label class="layui-form-label">{:lang('ac_parent_id')}</label>
+                                    <label class="layui-form-label">{:lang('cc_parent_id')}</label>
                                     <div class="layui-input-block">
-                                        <select name="ac_parent_id" class="form-control">
+                                        <select name="cc_parent_id" class="form-control">
                                             <option value="0">≡ 请选择 ≡</option>
-                                            {foreach name="categorys" item="item" key="k"}
-                                                <option value="{$item.ac_id}" {if condition="$pid eq $item.ac_id"}selected{/if}>{$item.ac_name}</option>
+                                            {foreach name="courseclasss" item="category" key="k"}
+                                                <option value="{$category.cc_id}" {if condition="$pid eq $category.cc_id"}selected{/if}>{$category.cc_name}</option>
                                             {/foreach}
                                         </select>
                                     </div>
                                 </div>
                                 <div class="layui-form-item layui-form-text">
-                                    <label class="layui-form-label">{:lang('ac_name')}</label>
+                                    <label class="layui-form-label">{:lang('cc_name')}</label>
                                     <div class="layui-input-block">
-                                        <input type="text" name="ac_name" lay-verify="required" autocomplete="off" class="layui-input" value="{$category.ac_name}">
+                                        <input type="text" name="cc_name" lay-verify="required" autocomplete="off" class="layui-input" value="{$courseclass.cc_name}">
                                     </div>
                                 </div>
                                 <div class="layui-form-item layui-form-text layui-col-lg6">
-                                    <label class="layui-form-label">{:lang('ac_pic')}</label>
+                                    <label class="layui-form-label">{:lang('cc_pic')}</label>
                                     <div class="layui-input-block">
                                         <div class="layui-upload">
                                             <button type="button" class="layui-btn" id="test1">上传图片</button>
-                                            <div class="show" id="show" {empty name="category.ac_pic"}style="display: none"{/empty}>
-                                                <i style="font-size: 30px" class="layui-picture layui-icon layui-icon-picture" {notempty name="category.ac_pic"}data-src="__ROOT__/{$category.ac_pic}"{/notempty}></i>
-                                                <input type="hidden" name="ac_pic" value="{$category.ac_pic}">
+                                            <div class="show" id="show" {empty name="courseclass.cc_pic"}style="display: none"{/empty}>
+                                                <i style="font-size: 30px" class="layui-picture layui-icon layui-icon-picture" data-src="__ROOT__/{$courseclass.cc_pic}"></i>
+                                                <input type="hidden" name="cc_pic" value="{$courseclass.cc_pic}">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="layui-form-item layui-form-text">
-                                    <label class="layui-form-label">{:lang('ac_listorder')}</label>
+                                    <label class="layui-form-label">{:lang('cc_listorder')}</label>
                                     <div class="layui-input-block">
-                                        <input type="text" name="ac_listorder" lay-verify="required" autocomplete="off" class="layui-input" value="{$category.ac_listorder}">
+                                        <input type="text" name="cc_listorder" lay-verify="required" autocomplete="off" class="layui-input" value="{$courseclass.cc_listorder}">
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
-                                    <label class="layui-form-label">{:lang('is_show')}</label>
+                                    <label class="layui-form-label">{:lang('cc_state')}</label>
                                     <div class="layui-input-block">
-                                        <input type="radio" name="is_show" value="1" title="{:lang('yes')}"  checked="">
-                                        {php}$checked = $category['is_show'] ? '' : 'checked';{/php}
-                                        <input type="radio" name="is_show" value="0" title="{:lang('no')}" {$checked}>
+                                        <input type="radio" name="cc_state" value="1" title="{:lang('open')}"  checked="">
+                                        {php}$checked = $courseclass['cc_state'] ? '' : 'checked';{/php}
+                                        <input type="radio" name="cc_state" value="0" title="{:lang('close')}" {$checked}>
                                     </div>
                                 </div>
                                 <div class="layui-form-item">

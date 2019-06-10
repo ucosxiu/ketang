@@ -1,0 +1,45 @@
+<!--pages/study/join/join.wxml-->
+<template name="lists">
+	<navigator url="{{item.goods_type=='0'?'/pages/goods/info/detail?id=':item.goods_type==1?'/pages/goods/video/detail?id=': ''}}{{item.goods_id}}" hover-class='none'>
+		<view class="weui-cell course {{modalName == item.goods_id ? 'move-cur' : ''}}" hoverClass="wsui-hover__list" bindtouchstart="listTouchStart" bindtouchmove="listTouchMove" bindtouchend="listTouchEnd" data-target='{{item.goods_id}}'>
+			<button formType="submit" style="width:100%;height:100%;position:absolute;top:0;left:0;opacity:0;z-index: 999;"></button>
+			<view class="weui-cell__hd imgbox">
+				<image class="thumb" src="{{item.goods_pic}}"></image>
+			</view>
+			<view class="weui-cell__bd info">
+				<view class="h2tit">{{item.goods_name}}</view>
+				<view class="h3tit f12 details">　</view>
+				<view>
+					<view class="weui-flex">
+						<view class="weui-flex__item">
+							<view class="placeholder price f12">{{item.goods_price>0?'￥'+item.goods_price:'免费'}}</view>
+						</view>
+						<view class="weui-flex__item">
+							<view class="placeholder buy f12 tac">详情</view>
+						</view>
+					</view>
+				</view>
+			</view>
+			<view class='move'>
+				<view class="btn-del" catchtap='deleteGoods' data-id="{{item.goods_id}}">删除</view>
+			</view>
+		</view>
+	</navigator>
+</template>
+<view class='container'>
+	<view class='weui-panel' wx:if="{{lists.length > 0}}" >
+		<view class='weui-panel__bd'>
+			<template is="lists" wx:for="{{lists}}" wx:key="" data="{{item, modalName}}"/>
+			<view class="weui-loadmore weui-loadmore_line" wx:if="{{page.more && !page.loading}}">
+			</view>
+			<view class="weui-loadmore" wx:if="{{page.loading && page.more}}">
+				<i class="weui-loading"></i>
+				<span class="weui-loadmore__tips">正在加载</span>
+			</view>
+		</view>
+	</view>
+	<view wx:else class='weui-cells'>
+		<view class='nodata' wx:if="{{page.isload}}">没有记录</view>
+	</view>
+</view>
+

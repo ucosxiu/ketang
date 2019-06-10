@@ -1,0 +1,24 @@
+/* pages/order/list.wxss */
+.weui-panel{
+}
+
+.weui-media-box_appmsg .weui-media-box__hd {
+    width: 82px;
+    height: 82px;
+    margin-right: 10px;
+}
+
+.weui-media-box__bd{
+	position: relative;
+}
+.promotions_type{
+	position: absolute;
+	right: 10px;
+	top: 10px;
+	width: 64px;
+	height: 64px;
+}
+.promotions_type image{
+	width: 100%;
+	height: 100%;
+}

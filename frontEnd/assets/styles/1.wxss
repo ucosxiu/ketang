@@ -1,0 +1,50 @@
+.column {
+    padding: 0 0 0 1rem;
+    background: #fff;
+    border-bottom: solid 10px #eff2f7;
+}
+
+.main {
+    text-align: center;
+}
+
+.main view .attr {
+    float: left;
+    width: 30%;
+}
+
+.main view .val {
+    float: left;
+    width: 100%;
+}
+
+.main view .choose-addr {
+    float: right;
+    width: 15rpx;
+    height: 30rpx;
+    transform: rotateX(180deg) rotateY(180deg);
+    margin: 0.3rem 1.5rem 0 0;
+}
+
+.main>view>view,.bottom>view {
+    display: inline-table;
+    width: 100%;
+}
+
+.main view .detail {
+    height: 12vw;
+}
+
+.save {
+    padding: 10vw 5vw 0;
+}
+
+.save>button {
+    transition: all 0.2s;
+    color: #fff;
+    background: #e56f0b;
+}
+
+.save>button:active {
+    background: #f6b80b;
+}

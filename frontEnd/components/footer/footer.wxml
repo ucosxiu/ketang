@@ -1,0 +1,15 @@
+<!--components/footer/footer.wxml-->
+<view class="weui-tabbar">
+	<block wx:for="{{tabBar.list}}">
+		<view wx:if="{{item.key == current}}" class='weui-tabbar__item weui-bar__item_on'>
+			<view class='weui-tabbar__icon iconfont {{item.icon}}'></view>
+			<view class='weui-tabbar__label'>{{item.text}}</view>
+		</view>
+		<view wx:else class='weui-tabbar__item'>
+			<navigator url='{{item.url}}' hover-class='none' open-type="switchTab">
+				<view class='weui-tabbar__icon iconfont {{item.icon}}'></view>
+				<view class='weui-tabbar__label'>{{item.text}}</view>
+			</navigator>
+		</view>
+	</block>	
+</view>

@@ -1,0 +1,10 @@
+/* pages/teacher/list.wxss */
+.teacher .weui-media-box {
+	position:static;
+}
+
+.thumb {
+    border-radius: 50%;
+    width: 100%;
+    height: 100%;
+}

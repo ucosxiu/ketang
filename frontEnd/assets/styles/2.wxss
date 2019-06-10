@@ -1,0 +1,66 @@
+.commonTop {
+    position: fixed;
+    width: 100%;
+    left: 0;
+    top: 0;
+    text-align: center;
+    font-size: 36rpx;
+    background: #efefef;
+    padding: 2% 0;
+    color: #595757;
+    z-index: 3;
+}
+
+.commonTop>image {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 4%;
+    height: 22px;
+    padding: 4.5% 5%;
+}
+
+.commonTop>image:active {
+    transform: scale(0.9);
+}
+
+.commonTop>text:nth-of-type(2) {
+    position: absolute;
+    right: 5%;
+    top: auto;
+}
+
+.chooseAddr {
+    display: flex!important;
+    align-items: center;
+    padding: 4% 0 4% 1rem;
+    background-color: #fff;
+    border-bottom: 10px solid #eff2f7;
+}
+
+.chooseAddr>.left {
+    text-align: left;
+    font-size: 32rpx;
+    display: flex!important;
+    width: 100%;
+    align-items: center;
+}
+
+.chooseAddr>.left>view {
+    display: block!important;
+}
+
+.chooseAddr>.left>image {
+    width: 46rpx;
+    margin-right: 16rpx;
+}
+
+.chooseAddr>.left>view {
+    width: auto!important;
+}
+
+.chooseAddr>image.right {
+    height: 16rpx;
+    width: 16rpx;
+    margin-right: 1rem;
+}

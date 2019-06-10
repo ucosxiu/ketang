@@ -1,0 +1,16 @@
+/* pages/article/detail.wxss */
+.weui-article{
+	background: #ffffff;
+}
+.weui-article image{
+	max-width: 100%;
+}
+
+.article-title{
+	margin-bottom: 20rpx;
+	background: #ffffff;
+	text-align: center;
+	font-size: 36rpx;
+	padding: 50rpx;
+	font-weight: bold;
+}

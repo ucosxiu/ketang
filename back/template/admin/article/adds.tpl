@@ -71,17 +71,19 @@
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">&nbsp;{:lang('article_content')}</label>
                                     <div class="layui-input-block">
-                                        <textarea name="article_content" id="template_content">{$template.article_content|default=''}</textarea>
+                                        <textarea name="article_content" id="template_content" class="editor">{$template.article_content|default=''}</textarea>
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
                                     <div class="layui-input-block">
-                                        <button class="layui-btn" lay-submit="" lay-filter="ajax-submit">{:lang('submit')}</button>
+                                        <button class="layui-btn" lay-submit="" lay-filter="ajax-submit1">{:lang('submit')}</button>
                                     </div>
                                 </div>
                             </form>
                         </div>
-
+                        <script type="text/javascript" src="__STATIC__/system/js/bootstrap-markdown.min.js"></script>
+                        <script type="text/javascript" src="__STATIC__/system/js/hyperdown.min.js"></script>
+                        <script type="text/javascript" src="__STATIC__/system/js/jquery.pasteupload.js"></script>
                         <script type="text/javascript" src="__STATIC__/ueditor/ueditor.config.js"></script>
                         <script type="text/javascript" src="__STATIC__/ueditor/ueditor.all.min.js"></script>
                         <script type="text/javascript" charset="utf-8" src="__STATIC__/ueditor/lang/zh-cn/zh-cn.js"></script>
@@ -90,7 +92,7 @@
                                 layui.config({
                                     base: '__STATIC__/system/js/' //静态资源所在路径,
                                     ,version: '1.2.1'
-                                }).use(['index', 'admin', 'form', 'upload'], function(){
+                                }).use(['index', 'admin', 'form', 'upload', 'layedit'], function(){
                                     var table = layui.table
                                         ,admin = layui.admin
                                         ,form = layui.form
@@ -109,15 +111,44 @@
                                         layer.close(preview)
                                     })
 
-                                    var url="{:url('Ueditor/index')}";
-                                    var ue = UE.getEditor('template_content',{
-                                        serverUrl :url
+
+                                    var layedit = layui.layedit;
+                                    layedit.set({
+                                        uploadImage: {
+                                            url: "{:Url('asset/layuiup')}" //接口url
+                                            ,type: '' //默认post
+                                        }
                                     });
+                                    var layeditindex = layedit.build('template_content', {
+                                        tool: [
+                                            'strong' //加粗
+                                            ,'italic' //斜体
+                                            ,'underline' //下划线
+                                            ,'del' //删除线
 
-                                    setTimeout(function () {
-                                        ue.setHeight(300)
-                                    }, 500)
+                                            ,'|' //分割线
 
+                                            ,'left' //左对齐
+                                            ,'center' //居中对齐
+                                            ,'right' //右对齐
+                                            ,'link' //超链接
+                                            ,'unlink' //清除链接
+                                            ,'image' //插入图片
+
+                                        ]
+                                    }); //建立编辑器
+                                    layedit.sync(layeditindex)
+
+                                    if (false) {
+                                        var url="{:url('Ueditor/index')}";
+                                        var ue = UE.getEditor('template_content',{
+                                            serverUrl :url
+                                        });
+
+                                        setTimeout(function () {
+                                            ue.setHeight(300)
+                                        }, 500)
+                                    }
                                     var uploadInst = upload.render({
                                         elem: '#test1'
                                         ,url: '{:Url('asset/upload')}'
@@ -145,7 +176,62 @@
                                         }
                                     });
 
+                                    layui.form.on('submit(ajax-submit1)', function(obj){
+                                        var url = obj.form.action;
+                                        obj.field.article_content = layedit.getContent(layeditindex)
+                                        $.post(url, obj.field, function(data){
+                                            if (data.code) {
+                                                layer.msg(data.msg, {
+                                                    offset: '15px'
+                                                    ,icon: 1
+                                                    ,time: 1000
+                                                }, function(){
+                                                    if (data.url) {
+                                                        location.href = data.url
+                                                    }
+                                                });
+                                            } else {
+                                                layer.msg(data.msg, {
+                                                    offset: '15px'
+                                                    ,icon: 0
+                                                    ,time: 1000
+                                                }, function(){
+                                                });
+                                            }
+                                        }, 'json')
+                                    })
                                 })
+
+                                if ($(".editor", $('.form')).size() > 0) {
+                                    $.fn.markdown.messages.zh = {
+                                        Bold: "粗体",
+                                        Italic: "斜体",
+                                        Heading: "标题",
+                                        "URL/Link": "链接",
+                                        Image: "图片",
+                                        List: "列表",
+                                        "Unordered List": "无序列表",
+                                        "Ordered List": "有序列表",
+                                        Code: "代码",
+                                        Quote: "引用",
+                                        Preview: "预览",
+                                        "strong text": "粗体",
+                                        "emphasized text": "强调",
+                                        "heading text": "标题",
+                                        "enter link description here": "输入链接说明",
+                                        "Insert Hyperlink": "URL地址",
+                                        "enter image description here": "输入图片说明",
+                                        "Insert Image Hyperlink": "图片URL地址",
+                                        "enter image title here": "在这里输入图片标题",
+                                        "list text here": "这里是列表文本",
+                                        "code text here": "这里输入代码",
+                                        "quote here": "这里输入引用文本"
+                                    };
+                                    var parser = new HyperDown();
+                                    window.marked = function (text) {
+                                        return parser.makeHtml(text);
+                                    };
+                                }
                             })
                         </script>
                     </div>

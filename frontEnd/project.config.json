@@ -1,0 +1,111 @@
+{
+	"description": "项目配置文件",
+	"packOptions": {
+		"ignore": []
+	},
+	"setting": {
+		"urlCheck": false,
+		"es6": true,
+		"postcss": true,
+		"minified": true,
+		"newFeature": true,
+		"autoAudits": false,
+		"checkInvalidKey": true
+	},
+	"compileType": "miniprogram",
+	"libVersion": "2.7.1",
+	"appid": "wx7989803ad9c3c3dc",
+	"projectname": "frontEnd",
+	"debugOptions": {
+		"hidedInDevtools": []
+	},
+	"isGameTourist": false,
+	"simulatorType": "wechat",
+	"simulatorPluginLibVersion": {},
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"currentL": -1,
+			"list": []
+		},
+		"miniprogram": {
+			"current": 8,
+			"list": [
+				{
+					"id": 0,
+					"name": "视频",
+					"pathName": "pages/goods/video/detail",
+					"query": "id=10",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "老师",
+					"pathName": "pages/teacher/info",
+					"query": "id=1",
+					"scene": null
+				},
+				{
+					"id": 2,
+					"name": "课程",
+					"pathName": "pages/goods/detail",
+					"query": "id=10",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "我的",
+					"pathName": "pages/member/index",
+					"query": "id=10",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "我的收藏",
+					"pathName": "pages/member/fav/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 5,
+					"name": "文章",
+					"pathName": "pages/article/detail",
+					"query": "id=1",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "老师列表",
+					"pathName": "pages/teacher/list",
+					"query": "id=1",
+					"scene": null
+				},
+				{
+					"id": 7,
+					"name": "报名",
+					"pathName": "pages/goods/info/detail",
+					"query": "id=11",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "我的订单",
+					"pathName": "pages/order/list",
+					"query": "",
+					"scene": null
+				}
+			]
+		}
+	}
+}

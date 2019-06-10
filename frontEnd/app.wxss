@@ -1,0 +1,37 @@
+/**app.wxss**/
+.container {
+	min-height: 100vh;
+	font-size:28rpx;
+} 
+.flex {
+	display:flex;
+}
+.height10 {
+    height: 10px;
+    background-color: #f9f9f9;
+}
+.clearBoth{
+	clear: both;
+}
+
+.nodata{
+	text-align: center;
+	padding: 100rpx 0;
+}
+
+.ord-status-txt-ts{font-size:13px; color:#ee7800;}
+.weui-panel__hd{padding:10px 15px 10px 10px;}
+.weui-panel__hd:after{left:10px;}
+
+.ords-btn-dele{display:inline-block; margin-left:10px; padding:2px 15px; font-size:14px; border:1px solid #333; border-radius:3px; color:#333;}
+.ords-btn-com{display:inline-block; margin-left:10px; padding:2px 15px; font-size:14px; border:1px solid #e07100; border-radius:3px; color:#e07100;}
+
+.weui-cell.oder-opt-btnbox{display:block; text-align:right;}
+.ord-statistics{padding:10px 15px; border-top:1px solid #e5e5e5; font-size:13px; text-align:right;}
+.ord-statistics span{margin-left:5px;}
+
+@import "template/goods/goods.wxss";
+@import 'assets/styles/weui.wxss';
+@import 'assets/styles/prompt.wxss';
+@import 'assets/styles/skyvow.wxss';
+@import 'assets/styles/iconfont.wxss';

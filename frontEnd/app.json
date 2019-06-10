@@ -1,0 +1,62 @@
+{
+	"pages": [
+		"pages/index/index",
+		"pages/member/index",
+		"pages/member/fav/index",
+
+		"pages/goods/video/detail",
+		"pages/goods/info/detail",
+		"pages/goods/audio/detail",
+
+		"pages/teacher/info",
+		"pages/teacher/list",
+
+		"pages/study/index",
+		"pages/study/join/join",
+
+		"pages/order/list",
+		"pages/order/index",
+
+		"pages/article/detail"
+	],
+	"tabBar": {
+		"color": "#474747",
+		"backgroundColor": "#fff",
+		"borderStyle": "black",
+		"selectedColor": "#0095fa",
+		"list": [
+			{
+				"pagePath": "pages/index/index",
+				"text": "发现",
+				"slug": "index",
+				"icon": "faxian",
+				"iconPath": "assets/images/tabBar/faxian.png",
+				"selectedIconPath": "assets/images/tabBar/faxian_0095fa.png"
+			},
+			{
+				"pagePath": "pages/study/join/join",
+				"text": "我的学习",
+				"slug": "index",
+				"icon": "faxian",
+				"iconPath": "assets/images/tabBar/classroom.png",
+				"selectedIconPath": "assets/images/tabBar/classroom_0095fa.png"
+			},
+			{
+				"pagePath": "pages/member/index",
+				"text": "我的",
+				"slug": "mine",
+				"icon": "mine",
+				"iconPath": "assets/images/tabBar/mine.png",
+				"selectedIconPath": "assets/images/tabBar/mine_0095fa.png"
+			}
+		]
+	},
+	"window": {
+		"backgroundTextStyle": "light",
+		"backgroundColor": "#999999",
+		"navigationBarBackgroundColor": "#fff",
+		"navigationBarTitleText": "教育",
+		"navigationBarTextStyle": "black"
+	},
+	"sitemapLocation": "sitemap.json"
+}

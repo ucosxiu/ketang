@@ -1,72 +1,89 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Administrator
- * Date: 2019-5-24
- * Time: 3:44
- */
 namespace app\api\controller;
 
-use org\Emoji;
-use org\Wechat;
-use org\wechat\SDK;
-use PHPZxing\PHPZxingDecoder;
 use think\App;
 use think\Controller;
 
 class Apibase extends Controller
 {
-    public $weObj;
-
-    public function __construct(App $app = null)
+    public $param;
+    function __construct(App $app = null)
     {
         parent::__construct($app);
-        $config = config('wechat');
-        $config['token'] = 'simuquanyi';
-        $this->weObj = new SDK($config);
-        $this->decryptMsg();
-
-        $this->loadMember();
     }
 
-    private function decryptMsg() {
-        $this->weObj->valid();
-    }
-
-    private function loadMember() {
-        $wedata = $this->weObj->getRev()->getRevData();
-        $openid = $wedata['FromUserName'];
-        $member_model = model('member');
-        $member = $member_model->get(['openid' => $openid]);
-        if ($member) {
-            $this->member = $member;
-        } else {
-            $userinfo = $this->weObj->getUserInfo($openid);
-            if (!empty($userinfo) && !empty($userinfo['openid'])) {
-                $emoji = new Emoji();
-                $nickname = $emoji->emoji_unified_to_html($userinfo['nickname']);
-                $nickname = preg_replace('/xE0[x80-x9F][x80-xBF]'.'|xED[xA0-xBF][x80-xBF]/S','?', $nickname );
-
-                $nickname = preg_replace('/\xEE[\x80-\xBF][\x80-\xBF]|\xEF[\x81-\x83][\x80-\xBF]/', '', $nickname);
-
-                $userinfo['nickname'] = strip_tags($nickname);//过滤emoji表情产生的html标签
-                $userinfo['member_name'] = $userinfo['nickname'];
-                $data = [
-                    'openid' => $userinfo['openid'],
-                    'member_name' => $userinfo['nickname'],
-                    'nickname' => $userinfo['nickname'],
-                    'sex' => $userinfo['sex'],
-                    'headimgurl' => $userinfo['headimgurl'],
-                    'city' => $userinfo['city'],
-                    'province' => $userinfo['province'],
-                    'country' => $userinfo['country'],
-                ];
-                update_wechat($userinfo);
-                $member = $member_model->get(['openid' => $openid]);
-                $this->member = $member;
-            } else {
-                exit;
-            }
+    function initialize()
+    {
+        $this->checkSignature();
+        $noAccess = ['data', 'article'];
+        if (!in_array(strtolower($this->request->controller()), $noAccess)) {
+            $this->checkAccessToken();
         }
+    }
+
+    public function checkSignature() {
+        $signature = $this->request->param('signature', '', 'trim');
+        if (!$signature) {
+            $this->result('', '0', '获取用户信息失败', 'json');
+        }
+        $param = $this->request->param();
+        unset($param['signature']);
+        ksort($param);
+        $r = [];
+        $n = [];
+        foreach ($param as $key => $value) {
+            if (in_array($key, ['address', 'content', 'nickname', 'oss_img', 'avatar', 'back_img', 'font_color', ''])) {
+                $r[$key] = urlencode($this->re($value));
+            } else {
+                $r[$key] = $value;
+            }
+            array_push($n, $key . '=' .$r[$key]);
+        }
+
+        $n = implode('&', $n);
+        $n = strtoupper($n);
+
+        $p = md5($n);
+        $p .= "17378a5fe415fc1abf05b25f606392d7";
+        $signature = aesDecrypt($signature);
+
+        if ($p != $signature) {
+            $this->result('', 0, '获取用户信息失败', 'json');
+        }
+
+        $this->param = $param;
+    }
+
+    /**
+     * 检查用户是否存在
+     */
+    private function checkAccessToken() {
+        $member_model = model('member');
+        $member = $member_model->get(['openid' => $this->param['openid']]);
+        if (!$member) {
+            $this->result([], 0, '错误请求','json');
+        }
+        $this->member = $member;
+    }
+
+    function re($e) {
+        $search = [
+            '/!/g',
+            '/~/g',
+            '/\*/g',
+            '/\'/g',
+            '/\(/g',
+            '/\)/g',
+        ];
+        $replace = [
+            "%21",
+            "%7E",
+            "%2A",
+            "%27",
+            "%28",
+            "%29"
+        ];
+        $e = str_replace($search, $replace, $e);
+        return $e;
     }
 }

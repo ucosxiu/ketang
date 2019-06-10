@@ -1,0 +1,94 @@
+<!--pages/goods/info/detail.wxml-->
+<view class="container proinfo">
+<form bindsubmit="collectFormId" reportSubmit="true">
+	<view class='coursebg' wx:if="{{!played}}">
+		<image src='{{info.goods_pic}}'></image>
+	</view>
+    <view class="page__hd bg_color info">
+        <view class="weui-media-box__title f14">{{info.goods_name}}</view>
+        <view class="weui-cell__bd">
+            <view class="weui-flex">
+                <view class="weui-flex__item">
+                    <view class="placeholder price f12">{{info.goods_price>0?' ￥ '+info.goods_price:'免费'}}</view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="height10"></view>
+    <view class="page__bd tabbox">
+        <view class="weui-tab">
+            <view class="weui-navbar" style='width: 160rpx;'>
+                <view bindtap="tabClick" class="weui-navbar__item {{activeIndex==index?'weui-bar__item_on':''}}" id="{{index}}" wx:for="{{tabs}}" wx:key="{{index}}">
+                    <view class="weui-navbar__title">{{item}}</view>
+                </view>
+                <view class="weui-navbar__slider" style="left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);width: {{sliderWidth}}px;"></view>
+            </view>
+            <view class="weui-tab__panel">
+                <view class="weui-tab__content" hidden="{{activeIndex!=0}}">
+                    <template is="abnor" data="{{...abnorData}}" wx:if="{{info.goods_details.length===0&&info.teacherlist.length===0}}"></template>
+                    <block wx:if="{{info.goods_details.length!==0}}">
+                        <view class="f13 tit_icon">
+                            <view class="tit">课程简介</view>
+                        </view>
+                        <view class="weui-tab__content f12">
+                            <import src="../../../wxParse/wxParse.wxml"/>
+							<template is="wxParse" data="{{wxParseData:content.nodes}}"/>
+                        </view>
+                    </block>
+                    <view class="f13 tit_icon">
+                        <view class="tit">课程老师</view>
+                    </view>
+                    <view class="weui-panel teacher">
+                        <navigator class="weui-media-box weui-media-box_appmsg" url="/pages/teacher/info?id={{item.teacher_id}}" hoverClass="wsui-hover__base" wx:for="{{info.teacher}}" wx:key="{{index}}">
+                            <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+                                <image class="thumb" src="{{host}}{{item.teacher_pic}}"></image>
+                            </view>
+                            <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+                                <view class="weui-media-box__title">{{item.teacher_name}}</view>
+                                <view class="weui-media-box__desc"></view>
+                            </view>
+                        </navigator>
+                        <template is="abnor" data="{{...abnorData}}" wx:if="{{!info.teacherlist}}"></template>
+                    </view>
+                </view>
+                <view class="weui-tab__content notice f12" hidden="{{activeIndex!=2}}">
+                </view>
+            </view>
+        </view>
+    </view>
+	<view class='footer'>
+		<view class='flex1' bindtap='fav' wx:if="{{!info.is_fav}}">
+			<button formType="submit" style="width:100%;height:100%;position:absolute;top:0;left:0;opacity:0;z-index: 999;"></button>
+			<view class='iconfont icon-shoucang'></view>
+			<view class='fav'>收藏</view>
+		</view>
+		<view class='flex1 faved' bindtap='fav' wx:else>
+			<button formType="submit" style="width:100%;height:100%;position:absolute;top:0;left:0;opacity:0;z-index: 999;"></button>
+			<view class='iconfont icon-shoucang'></view>
+			<view class='fav'>已收藏</view>
+		</view>
+		<view class='flex2' bindtap='sign' wx:if="{{!info.if_has_sign}}">
+			<button formType="submit" style="width:100%;height:100%;position:absolute;top:0;left:0;opacity:0;z-index: 999;"></button>
+			<view class='btn-buy'>立即报名</view>
+		</view>
+		<view class='flex2'wx:else>
+			<view class='btn-default'>已报名</view>
+		</view>
+	</view>
+	<dialog id="modal"  style="z-index: 999" title="填写信息" bind:confirmEvent="confirmEvent">
+		<view class="weui-cell">
+			<view class="weui-cell__bd">
+				<input value="{{form.realname}}" bindinput='input1' placeholder='请填写姓名'></input>
+			</view>
+		</view>
+		<view class="weui-cell">
+			<view class="weui-cell__bd">
+				<input value="{{form.mobile}}" bindinput='input2' placeholder='请填写手机号'></input>
+			</view>
+		</view>
+	</dialog>
+</form>  	
+</view>
+
+
+

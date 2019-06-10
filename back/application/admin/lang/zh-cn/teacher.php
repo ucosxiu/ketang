@@ -6,15 +6,10 @@
  * Time: 18:06
  */
 $lang = [
-    'teacher_name' => '教师名',
-    'teacher_no'    => '教师工号',
-    'mobile'    => '手机号',
-    'avatar'    => '头像',
-    'password'  => '密码',
-    'position'  => '职位',
-    'headmaster' => '班主任',
-    'dean' => '院长',
-    'student_unio' => '学生会'
+    'teacher_name' => '教师姓名',
+    'teacher_pic'    => '头像',
+    'teacher_state' => '启用',
+    'teacher_intro' => '简介'
 ];
 
 return $lang;

@@ -14,7 +14,7 @@
                             <ul class="layui-tab-title">
                                 <li class="layui-this">{:lang('list')}</li>
                                 <li>
-                                    <a href="{:Url('articleclass/add')}">{:lang('add')}</a>
+                                    <a href="{:Url('courseclass/add')}">{:lang('add')}</a>
                                 </li>
                             </ul>
                         </div>
@@ -32,12 +32,12 @@
                                 //方法级渲染
                                 table.render({
                                     elem: '#LAY_table'
-                                    ,url: '{:Url('articleclass/index')}'
+                                    ,url: '{:Url('courseclass/index')}'
                                     ,cols: [[
                                         {field:'id', title: 'ID', width:80}
-                                        ,{field:'ac_name', title: '{:lang('ac_name')}', width:200}
-                                        ,{width:120, title: '{:lang('ac_pic')}',templet:function(res){
-                                            return '<img class="preview" src="__ROOT__/'+res.ac_pic+'">'
+                                        ,{field:'cc_name', title: '{:lang('cc_name')}', width:200}
+                                        ,{width:120, title: '{:lang('cc_pic')}',templet:function(res){
+                                            return '<img class="preview" src="__ROOT__/'+res.cc_pic+'">'
                                             }}
                                         ,{fixed: 'right', width:180, title: '{:lang('op')}', sort: true, toolbar: '#barDemo'}
                                     ]]
@@ -65,7 +65,7 @@
                                     } else if (obj.event === 'del') {
                                         layer.confirm('真的删除行么', function(index){
                                             admin.req({
-                                                url: '{:Url("articleclass/del")}',
+                                                url: '{:Url("courseclass/del")}',
                                                 type: "post",
                                                 data: {id: obj.data.id},
                                                 done: function(e){
@@ -80,7 +80,7 @@
                                             })
                                         });
                                     } else if(obj.event === 'edit'){
-                                        window.location.href =  '{:Url('articleclass/edit')}'+'?id='+obj.data.id;
+                                        window.location.href =  '{:Url('courseclass/edit')}'+'?id='+obj.data.id;
                                     }
                                 });
                             });

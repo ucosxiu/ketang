@@ -1,0 +1,67 @@
+<!--index.wxml-->
+<import src="../../template/goods/goods"></import>
+<view class="container page home">
+	<form bindsubmit="collectFormId" reportSubmit="true">
+		<view class='bannerbox'>
+			<swiper
+				indicator-dots="{{indicatorDots}}"
+				autoplay="{{autoplay}}"
+				interval="{{interval}}"
+				duration="{{duration}}"
+				>
+					<block wx:for="{{ads}}">
+						<swiper-item class="banner-item">
+							<navigator url="{{item.ad_link}}" hover-class='none' wx:if="{{item.ad_link}}">
+								<image src="{{item.ad_img}}" class="bannerimg" mode=''/>
+							</navigator>
+							<image wx:else src="{{item.ad_img}}" class="bannerimg" mode=''/>
+						</swiper-item>
+					</block>
+			</swiper>
+		</view>
+		<!--nav-->
+		<view class="nav flex">
+			<block wx:for="{{navs}}" wx:for-item="item">
+			<navigator url="{{item.ad_link ? item.ad_link : ''}}" class="nav-item" hover-class='none'>
+				<image src="{{item.ad_img}}"></image>
+				<text>{{item.ad_title}}</text>
+			</navigator>
+			</block>
+		</view>
+		<view class="height10"></view>
+		<view class="bg_color hot">
+			<view class="weui-flex weui-title">
+				<text class="weui-flex__item">热门课程</text>
+				<view class='weui-cell__ft'>全部</view>
+			</view>
+			<view class="videoList">
+				<view class="videoItem{{index%2>0?' nrt':''}}{{index>1?' mt10':''}}" wx:for="{{hots}}" wx:key="{{index}}">
+					<navigator url="{{item.goods_type=='0'?'/pages/goods/info/detail?id=':item.goods_type==1?'/pages/goods/video/detail?id=': ''}}{{item.goods_id}}" hoverClass="wsui-hover__base" style="position: relative;">
+						<button formType="submit" style="width:100%;height:100%;position:absolute;top:0;left:0;opacity:0;z-index: 999;"></button>
+						<view class="logo">
+							<image src="{{item.goods_pic}}"></image>
+							<view class="v" wx:if="{{item.goods_type == 1}}">
+								<image src="/assets/images/video.png"></image>
+							</view>
+						</view>
+						<view class="name">{{item.goods_name}}</view>
+						<view class="info">
+							<span class="price">{{item.goods_price>0?'￥'+item.goods_price:'免费'}}</span>
+						</view>
+					</navigator>
+				</view>
+				<view class="clearBoth"></view>
+			</view>
+		</view>
+		<view class="height10"></view>
+		<view class="bg_color ">
+			<view class="weui-flex weui-title">
+				<text class="weui-flex__item">专家推荐</text>
+				<view class='weui-cell__ft'>全部</view>
+			</view>
+			<view class="bgfff">
+				<template is="lists" wx:for="{{recommends}}" data="{{item}}"/>
+			</view>
+		</view>	
+	</form>  
+</view>

@@ -1,0 +1,89 @@
+<!--pages/member/index.wxml-->
+<view class="container">
+	<view class='userinfo'>
+		<image src="{{userInfo && userInfo.avatar_url ? userInfo.avatar_url : '../../assets/images/default.png'}}" class='logo'></image>
+		<view class='nickname'>
+			<text>{{userInfo.nick_name ? userInfo.nick_name : '登陆'}}</text>
+		</view>
+		<view class='getuserinfo'>
+			<button open-type='getUserInfo' bindgetuserinfo="onGotUserInfo"><text class='iconfont icon-update icongengxin' style=''></text></button>
+		</view>
+	</view>
+	<view class="weui-panel">
+		<view class="weui-panel__bd">
+			<view class="weui-media-box weui-media-box_small-appmsg">
+				<view class="weui-cells weui-cells_in-small-appmsg">
+					<navigator url="/pages/order/list" class="weui-cell weui-cell_access" hover-class="none">
+						<view class="weui-cell__hd"></view>
+						<view class="weui-cell__bd weui-cell_primary">
+							<view>我的订单</view>
+						</view>
+						<view class="weui-cell__ft weui-cell__ft_in-access"></view>
+					</navigator>
+					<!-- <navigator url="" class="weui-cell weui-cell_access" hover-class="none">
+						<view class="weui-cell__hd"></view>
+						<view class="weui-cell__bd weui-cell_primary">
+							<view>我的报名</view>
+						</view>
+						<view class="weui-cell__ft weui-cell__ft_in-access"></view>
+					</navigator> -->
+					<navigator url="/pages/member/fav/index" class="weui-cell weui-cell_access" hover-class="none">
+						<view class="weui-cell__hd"></view>
+						<view class="weui-cell__bd weui-cell_primary">
+							<view>我的收藏</view>
+						</view>
+						<view class="weui-cell__ft weui-cell__ft_in-access"></view>
+					</navigator>
+					<!-- <navigator url="" class="weui-cell weui-cell_access" hover-class="none">
+						<view class="weui-cell__hd"></view>
+						<view class="weui-cell__bd weui-cell_primary">
+							<view>分销返利</view>
+						</view>
+						<view class="weui-cell__ft weui-cell__ft_in-access"><text class='weui-cells__tips weui-cell_tip'>查看收益与提现</text></view>
+					</navigator> -->
+				</view>
+			</view>
+		</view>
+	</view>
+	<view class="weui-panel">
+		<view class="weui-panel__bd">
+			<view class="weui-media-box weui-media-box_small-appmsg">
+				<view class="weui-cells weui-cells_in-small-appmsg">
+					<view class="weui-cell weui-cell_access" hover-class="none">
+						<view class="weui-cell__hd"></view>
+						<view class="weui-cell__bd weui-cell_primary">
+							<view>联系客服</view>
+						</view>
+						<button open-type="contact" class='btn-dis-none'>联系客服</button>
+					</view>
+				</view>
+			</view>
+		</view>
+		<!-- <view class="weui-panel__bd">
+			<view class="weui-media-box weui-media-box_small-appmsg">
+				<view class="weui-cells weui-cells_in-small-appmsg">
+					<navigator url="" class="weui-cell weui-cell_access" hover-class="none">
+						<view class="weui-cell__hd"></view>
+						<view class="weui-cell__bd weui-cell_primary">
+							<view>意见反馈</view>
+						</view>
+						<view class="weui-cell__ft weui-cell__ft_in-access"></view>
+					</navigator>
+				</view>
+			</view>
+		</view> -->
+		<!-- <view class="weui-panel__bd">
+			<view class="weui-media-box weui-media-box_small-appmsg">
+				<view class="weui-cells weui-cells_in-small-appmsg">
+					<navigator url="" class="weui-cell weui-cell_access" hover-class="none">
+						<view class="weui-cell__hd"></view>
+						<view class="weui-cell__bd weui-cell_primary">
+							<view>常见问题</view>
+						</view>
+						<view class="weui-cell__ft weui-cell__ft_in-access"><text class='weui-cells__tips'>遇到问题先来这里看看</text></view>
+					</navigator>
+				</view>
+			</view>
+		</view> -->
+	</view>
+</view>

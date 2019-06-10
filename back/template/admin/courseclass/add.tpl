@@ -1,13 +1,13 @@
 {extend name="public/base" /}
 {block name="main-content"}
-    <div class="layui-fluid" style="padding: 0">
+    <div class="layui-fluid">
         <div class="layui-row">
             <div class="layui-col-md12">
                 <div class="layui-card" style="padding: 15px 0">
                     <div class="layui-card-header">
                         <div class="layui-tab">
                             <ul class="layui-tab-title">
-                                <li><a href="{:Url('articleclass/index')}">{:lang('list')}</a></li>
+                                <li><a href="{:Url('courseclass/index')}">{:lang('list')}</a></li>
                                 <li class="layui-this">{:lang('add')}</li>
                             </ul>
                         </div>
@@ -29,45 +29,45 @@
                         <div class="layui-form">
                             <form class="layui-form" action="" method="post" onsubmit="return false">
                                 <div class="layui-form-item">
-                                    <label class="layui-form-label">{:lang('ac_parent_id')}</label>
+                                    <label class="layui-form-label">{:lang('cc_parent_id')}</label>
                                     <div class="layui-input-block">
-                                        <select name="ac_parent_id" class="form-control">
+                                        <select name="cc_parent_id" class="form-control">
                                             <option value="0">≡ 请选择 ≡</option>
-                                            {foreach name="categorys" item="category" key="k"}
-                                                <option value="{$category.ac_id}" {if condition="$pid eq $category.ac_id"}selected{/if}>{$category.ac_name}</option>
+                                            {foreach name="courseclasss" item="category" key="k"}
+                                                <option value="{$category.cc_id}" {if condition="$pid eq $category.cc_id"}selected{/if}>{$category.cc_name}</option>
                                             {/foreach}
                                         </select>
                                     </div>
                                 </div>
                                 <div class="layui-form-item layui-form-text">
-                                    <label class="layui-form-label">{:lang('ac_name')}</label>
+                                    <label class="layui-form-label">{:lang('cc_name')}</label>
                                     <div class="layui-input-block">
-                                        <input type="text" name="ac_name" lay-verify="required" autocomplete="off" class="layui-input" value="">
+                                        <input type="text" name="cc_name" lay-verify="required" autocomplete="off" class="layui-input" value="">
                                     </div>
                                 </div>
                                 <div class="layui-form-item layui-form-text layui-col-lg6">
-                                    <label class="layui-form-label">{:lang('ac_pic')}</label>
+                                    <label class="layui-form-label">{:lang('cc_pic')}</label>
                                     <div class="layui-input-block">
                                         <div class="layui-upload">
                                             <button type="button" class="layui-btn" id="test1">上传图片</button>
                                             <div class="show" id="show" style="display: none">
                                                 <i style="font-size: 30px" class="layui-picture layui-icon layui-icon-picture"></i>
-                                                <input type="hidden" name="ac_pic">
+                                                <input type="hidden" name="cc_pic" id="goods_pic">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="layui-form-item layui-form-text">
-                                    <label class="layui-form-label">{:lang('ac_listorder')}</label>
+                                    <label class="layui-form-label">{:lang('cc_listorder')}</label>
                                     <div class="layui-input-block">
-                                        <input type="text" name="ac_listorder" lay-verify="required" autocomplete="off" class="layui-input" value="255">
+                                        <input type="text" name="cc_listorder" lay-verify="required" autocomplete="off" class="layui-input" value="255">
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
-                                    <label class="layui-form-label">{:lang('is_show')}</label>
+                                    <label class="layui-form-label">{:lang('cc_state')}</label>
                                     <div class="layui-input-block">
-                                        <input type="radio" name="is_show" value="1" title="{:lang('open')}"  checked="">
-                                        <input type="radio" name="is_show" value="0" title="{:lang('close')}">
+                                        <input type="radio" name="cc_state" value="1" title="{:lang('open')}"  checked="">
+                                        <input type="radio" name="cc_state" value="0" title="{:lang('close')}">
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
@@ -107,6 +107,7 @@
                                         ,before: function(obj){
                                         }
                                         ,done: function(res){
+                                            //上传成功
                                             //如果上传失败
                                             if(res.code){
                                                 $('#show').show();
@@ -116,15 +117,9 @@
                                             } else {
                                                 return layer.msg('上传失败');
                                             }
-                                            //上传成功
                                         }
                                         ,error: function(){
-                                            //演示失败状态，并实现重传
-                                            var demoText = $('#demoText');
-                                            demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-xs demo-reload">重试</a>');
-                                            demoText.find('.demo-reload').on('click', function(){
-                                                uploadInst.upload();
-                                            });
+
                                         }
                                     });
 

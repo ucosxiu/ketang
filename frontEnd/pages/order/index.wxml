@@ -1,0 +1,25 @@
+<!--pages/order/index.wxml-->
+<view class='container page'>
+	<view class="weui-form-preview">
+		<view class="weui-form-preview__hd">
+			<view class="weui-form-preview__ittext">
+				<text class="weui-form-preview__label">{{orderinfo.order_sn}}</text>
+				<text class="weui-form-preview__value" style='text-align: right;'>
+					<text style="color: red" wx:if="{{orderinfo.order_state == 10}}">待支付</text>
+					<text style="color: red" wx:elif="{{orderinfo.order_state == 20}}">已完成</text>
+					<text style="color: red" wx:elif="{{orderinfo.order_state == 30}}">已完成
+</text>
+					<text style="color: red" wx:else>已取消</text>
+				</text>
+			</view>
+			<view class="weui-form-preview__ittext">
+				<text class="weui-form-preview__label">下单时间</text>
+				<text class="weui-form-preview__value">{{orderinfo.format_add_time}}</text>
+			</view>
+		</view>
+
+		
+	</view>
+</view>
+
+

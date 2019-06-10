@@ -1,0 +1,8 @@
+<!--pages/article/detail.wxml-->
+<view class='container'>
+	<view class='article-title'>{{article.article_title}}</view>
+	<view class='weui-article'>
+		<import src="../../wxParse/wxParse.wxml"/>
+		<template is="wxParse" data="{{wxParseData:content.nodes}}"/>
+	</view>
+</view>

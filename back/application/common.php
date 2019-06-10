@@ -571,3 +571,26 @@ function getfirstchar($s0) {
     if ($asc >= -11055 and $asc <= -10247)return "Z";
     return null;
 }
+
+
+
+/**
+ * 用户操作
+ * @param $order
+ */
+function operable_list_user($order) {
+    $order_state = $order['order_state'];
+    $list = array();
+    if ($order_state == ORDER_STATE_NEW) {
+        //未付款
+        //取消
+        $list['cancel'] = true;
+        $list['repay'] = true;
+    } elseif ($order_state == ORDER_STATE_PAY) {
+    } elseif ($order_state == ORDER_STATE_SUCCESS) {
+    } elseif ($order_state == ORDER_STATE_CANCEL) {
+        $list['delete'] = true;
+    }
+
+    return $list;
+}

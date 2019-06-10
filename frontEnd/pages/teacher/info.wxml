@@ -1,0 +1,33 @@
+<!--pages/teacher/info.wxml-->
+<import src="../../template/goods/goods"></import>
+<view class='container'>
+	<scroll-view scroll-y class="scrollPage">
+		<view class="UCenter-bg">
+			<image src="{{info.teacher_pic}}" class="png" mode="widthFix"></image>
+			<view class="text-xl">{{info.teacher_name}}</view>
+			<view class="margin-top-sm">
+				<text>{{info.teacher_intro}}</text>
+			</view>
+		</view>
+		<view class="page__bd tabbox">
+			<view class="weui-tab">
+				<view class="weui-navbar">
+					<view bindtap="tabClick" class="weui-navbar__item {{activeIndex==index?'weui-bar__item_on':''}}" id="{{index}}" wx:for="{{tabs}}" wx:key="{{index}}">
+						<view class="weui-navbar__title">{{item}}</view>
+					</view>
+					<view class="weui-navbar__slider" style="left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);width: {{sliderWidth}}px;"></view>
+				</view>
+			</view>
+			<view class="weui-tab__panel">
+                <view class="weui-tab__content f12" hidden="{{activeIndex!=0}}">
+
+                </view>
+                <view class="weui-tab__content" hidden="{{activeIndex!=1}}">
+					<view class="bgfff">
+						<template is="lists" wx:for="{{info.courses}}" data="{{item}}"/>
+					</view>
+                </view>
+            </view>
+		</view>
+	</scroll-view>
+</view>
